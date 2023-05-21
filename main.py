@@ -1,51 +1,32 @@
-class Projector:
-    """
-    This class have information about projector
-    He has information about class:model, resolution, lamp_hours, connected_device
-    And also has methods __repr__, add_input_device(@param device->str)
-    disconnected_device, increase_lamp_hours(@param hours),
-    this method increase lamp hours work,
-    and method get-instance, this method creates obj of this class
-    """
+from lab7.modules.lamp_projector import LampProjector
+from lab7.modules.home_theater import HomeTheater
+from lab7.modules.multi_board import MultiBoard
+from lab7.modules.tree_d_projector import ThreeDProjector
+from lab7.managers.projector_manager import ProjectManager
 
-    __instance = None
+if __name__ == "__main__":
+    projectors = [LampProjector("Panasonic", "480p", "HDMI", 5, "presentation", 15),
+                  LampProjector("Epson", "4k", "HDMI", 5, "sport", 15),
+                  HomeTheater("Samsung", "8k", "HDMI, USB", 2023, 57, "last", 5),
+                  HomeTheater("Samsung", "4k", "HDMI", 2021, 45, "last", 3),
+                  MultiBoard("Prestigio", "1920x1080", "HDMI", "multicolor", True, True, 5),
+                  MultiBoard("Prestigio", "1920x1080", "HDMI", "black", True, False, 4),
+                  ThreeDProjector("Panasonic", "4k", "HDMI", 4, 30),
+                  ThreeDProjector("Epson", "4k", "HDMI", 2, 45)]
 
-    def __init__(self, model="", resolution="", lamp_hours=0, connected_device=""):
-        self.module = model
-        self.resolution = resolution
-        self.lamp_hours = lamp_hours
-        self.connected_device = connected_device
-        self.instance = None
+    projector_manager = ProjectManager()
 
-    def __repr__(self):
-        return f"Projector(model={self.module}, resolution={self.resolution}, " \
-               f"lamp_hours={self.lamp_hours}, connected_device={self.connected_device})"
+    print("All my objects: ")
+    print(projector_manager.add_projector(projectors))
 
-    def add_input_device(self, device):
-        self.connected_device = device
-
-    def disconnected_device(self):
-        self.connected_device = None
-
-    def increase_lamp_hours(self, hours):
-        self.lamp_hours += hours
-
-    @staticmethod
-    def get_instance():
-        if not Projector.__instance:
-            Projector.__instance = Projector()
-        return Projector.__instance
+    print("Sorted massive by param: ")
+    print("-----------------------------------------------------------")
+    print(projector_manager.find_projector_by_model("Panasonic"))
+    print("-----------------------------------------------------------")
+    print(projector_manager.find_projector_by_resolution("1920x1080"))
 
 
-projectors = [Projector(), Projector("Panasonic", "1920x1080", 5, "HDMI"), Projector.get_instance(),
-              Projector.get_instance()]
 
-list = []
-for x in range(1,11):
-    list.append(x)
 
-print(list)
-print(list[1::2])
 
-for projector in projectors:
-    print(projector)
+
