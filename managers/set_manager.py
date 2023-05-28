@@ -1,3 +1,6 @@
+"""
+Module of SetManager class
+"""
 from lab7.managers.projector_manager import ProjectManager
 
 
@@ -15,19 +18,15 @@ class SetManager:
 
     def __init__(self, project_manager: ProjectManager):
         self.manager = project_manager
+        self.count = 0
 
     def __iter__(self):
         """
         Iterate over the set of colors from the projectors.
-
-        Yields:
-            str: A set of color.
-
         """
-        self.count = 0
         for projector in self.manager:
-            for set_of_color in projector.projector_color():
-                yield set_of_color
+            for set_colors in projector.projector_color:
+                yield set_colors
 
     def __len__(self):
         """
@@ -39,7 +38,7 @@ class SetManager:
         """
         length = 0
         for projector in self.manager:
-            length += len(projector.projector_color())
+            length += len(projector.projector_color)
         return length
 
     def __getitem__(self, item):
@@ -53,7 +52,7 @@ class SetManager:
             list: The colors from the specified index.
 
         """
-        return self.manager[item].projector_color()
+        return self.manager[item].projector_color
 
     def __next__(self):
         """

@@ -1,10 +1,17 @@
+"""
+Module of ProjectManager class
+"""
+from lab7.decorators.decorators import call_limit_decorator
+from lab7.decorators.decorators import count_of_args_decorator
+
+
 class ProjectManager:
     """
     This class is a manager of projectors.
 
     It provides functionality to add projectors to a container, access projectors by index,
-    iterate over projectors, find projectors based on specific criteria, and perform various operations
-    on the projectors.
+    iterate over projectors, find projectors based on specific criteria,
+    and perform various operations on the projectors.
 
     Attributes:
         projectors (list): List of projectors.
@@ -18,12 +25,15 @@ class ProjectManager:
         find_projector_by_model(model): Find projectors with a specific model.
         find_projector_by_resolution(resolution): Find projectors with a specific resolution.
         working_of_get_remaining_working_hours(): Get the remaining working hours of all projectors.
-        is_all_get_remaining_working_hours_greater_than(): Check if all projectors have remaining working hours greater than 15.
-        is_any_get_remaining_working_hours_greater_than(): Check if any projector has remaining working hours greater than 15.
+        is_all_get_remaining_working_hours_greater_than():
+        Check if all projectors have remaining working hours greater than 15.
+        is_any_get_remaining_working_hours_greater_than():
+        Check if any projector has remaining working hours greater than 15.
     """
 
     def __init__(self):
         self.projectors = []
+        self.count = 0
 
     def __len__(self):
         """
@@ -53,8 +63,7 @@ class ProjectManager:
         Returns:
             iterator: Iterator object.
         """
-        self.count = 0
-        return self.projectors
+        return iter(self.projectors)
 
     def __next__(self):
         """
@@ -84,8 +93,9 @@ class ProjectManager:
             list: Updated list of projectors.
         """
         self.projectors.extend(projectors)
-        return self.projectors
+        return list(enumerate(self.projectors))
 
+    @count_of_args_decorator
     def find_projector_by_model(self, model):
         """
         Find projectors with a specific model.
@@ -96,8 +106,9 @@ class ProjectManager:
         Returns:
             list: List of tuples containing the index and matching projectors.
         """
-        return list(enumerate(filter(lambda projector: getattr(projector, "model") == model, self.projectors)))
+        return list(filter(lambda projector: getattr(projector, "model") == model, self.projectors))
 
+    @call_limit_decorator(3)
     def find_projector_by_resolution(self, resolution):
         """
         Find projectors with a specific resolution.
@@ -108,8 +119,8 @@ class ProjectManager:
         Returns:
             list: List of tuples containing the index and matching projectors.
         """
-        return list(enumerate(filter(lambda projector: getattr(projector, "resolution") == resolution,
-                                     self.projectors)))
+        return list(filter(lambda projector: getattr(projector, "resolution") == resolution,
+                           self.projectors))
 
     def working_of_get_remaining_working_hours(self):
         """
@@ -118,14 +129,16 @@ class ProjectManager:
         Returns:
             list: List of tuples containing the remaining working hours and projectors.
         """
-        return list(zip([projector.get_remaining_working_hours() for projector in self.projectors], self.projectors))
+        return list(zip(
+            [projector.get_remaining_working_hours() for projector in self.projectors],
+            self.projectors))
 
     def is_all_get_remaining_working_hours_greater_than(self):
         """
         Check if all projectors have remaining working hours greater than 15.
-
         Returns:
-            bool: True if all projectors have remaining working hours greater than 15, False otherwise.
+            bool: True if all projectors have remaining working hours greater than 15,
+            False otherwise.
         """
         result = []
         for i in range(0, 8):
@@ -138,11 +151,11 @@ class ProjectManager:
         Check if any projector has remaining working hours greater than 15.
 
         Returns:
-            bool: True if any projector has remaining working hours greater than 15, False otherwise.
+            bool: True if any projector has remaining working hours greater than 15,
+            False otherwise.
         """
         result = []
         for i in range(0, 8):
             result.append(self.projectors[i].get_remaining_working_hours() > 15)
 
         return any(result)
-

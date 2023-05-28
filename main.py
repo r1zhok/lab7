@@ -1,3 +1,7 @@
+"""
+Module of main method
+"""
+
 from lab7.modules.lamp_projector import LampProjector
 from lab7.modules.home_theater import HomeTheater
 from lab7.modules.multi_board import MultiBoard
@@ -25,6 +29,7 @@ if __name__ == "__main__":
     print(projector_manager.find_projector_by_model("Panasonic"))
     print("-----------------------------------------------------------")
     print(projector_manager.find_projector_by_resolution("1920x1080"))
+    print("-----------------------------------------------------------")
     print(projector_manager.working_of_get_remaining_working_hours())
     print(projector_manager.is_all_get_remaining_working_hours_greater_than())
     print(projector_manager.is_any_get_remaining_working_hours_greater_than())
