@@ -17,6 +17,7 @@ class ThreeDProjector(AbstractProjector):
         super().__init__(model, resolution, connected_device)
         self.guarantee = guarantee
         self.energy_consumption = energy_consumption
+        self.projector_color = {"grey"}
 
     def add_input_device(self, device):
         self.connected_device = device

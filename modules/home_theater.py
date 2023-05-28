@@ -19,6 +19,7 @@ class HomeTheater(AbstractProjector):
         self.screen_size_in_inches = screen_size_in_inches
         self.version_of_smart_tv = version_of_smart_tv
         self.guarantee = guarantee
+        self.projector_color = {"black"}
 
     def add_input_device(self, device):
         self.connected_device = device
@@ -32,5 +33,6 @@ class HomeTheater(AbstractProjector):
     def __repr__(self):
         return f"Projector(model={self.model}, resolution={self.resolution}, " \
                f"connected_device={self.connected_device}, year_of_sale={self.year_of_sale}," \
-               f"screen_size_in_inches={self.screen_size_in_inches}, version_of_smart_tv={self.version_of_smart_tv}," \
+               f"screen_size_in_inches={self.screen_size_in_inches}, " \
+               f"version_of_smart_tv={self.version_of_smart_tv}," \
                f"guarantee={self.guarantee}, __WORKING_HOURS_PER_YEAR={HomeTheater.__WORKING_HOURS_PER_YEAR}) "

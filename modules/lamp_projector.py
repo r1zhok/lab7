@@ -10,11 +10,13 @@ class LampProjector(AbstractProjector):
     """
 
     def __init__(self, model="", resolution="", connected_device="", lamp_hours=0,
-                 description_of_the_information_output_mode="", the_maximum_permissible_lamp_operating_time=0):
+                 description_of_the_information_output_mode="",
+                 the_maximum_permissible_lamp_operating_time=0):
         super().__init__(model, resolution, connected_device)
         self.lamp_hours = lamp_hours
         self.descriptionOfTheInformationOutputMode = description_of_the_information_output_mode
         self.theMaximumPermissibleLampOperatingTime = the_maximum_permissible_lamp_operating_time
+        self.projector_color = {"yellow"}
 
     def add_input_device(self, device):
         self.connected_device = device

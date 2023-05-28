@@ -15,6 +15,13 @@ class AbstractProjector(ABC):
         self.model = model
         self.resolution = resolution
         self.connected_device = connected_device
+        self.projector_color = None
+
+    def __iter__(self):
+        return iter(sorted(self.projector_color))
+
+    def get_attributes(self, variable=None):
+        return {key: value for key, value in self.__dict__.items() if isinstance(value, variable)}
 
     @abstractmethod
     def add_input_device(self, device):
@@ -37,3 +44,4 @@ class AbstractProjector(ABC):
         This method calculates how much projector will be working
         :return: float
         """
+

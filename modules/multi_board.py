@@ -20,6 +20,7 @@ class MultiBoard(AbstractProjector):
         self.is_has_magnite_surface = is_has_magnite_surface
         self.the_possibility_of_recording_screen = the_possibility_of_recording_screen
         self.guarantee = guarantee
+        self.projector_color = {"green"}
 
     def add_input_device(self, device):
         self.connected_device = device
@@ -35,4 +36,5 @@ class MultiBoard(AbstractProjector):
                f"connected_device={self.connected_device}, color_of_surface={self.color_of_surface}, " \
                f"is_has_magnite_surface={self.is_has_magnite_surface}, " \
                f"the_possibility_of_recording_screen={self.the_possibility_of_recording_screen}, " \
-               f"guarantee={self.guarantee}, __WORKING_HOURS_PER_YEAR={MultiBoard.__WORKING_HOURS_PER_YEAR}) "
+               f"guarantee={self.guarantee}, " \
+               f"__WORKING_HOURS_PER_YEAR={MultiBoard.__WORKING_HOURS_PER_YEAR}) "
