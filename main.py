@@ -7,7 +7,6 @@ from lab7.modules.home_theater import HomeTheater
 from lab7.modules.multi_board import MultiBoard
 from lab7.modules.tree_d_projector import ThreeDProjector
 from lab7.managers.projector_manager import ProjectManager
-from lab7.modules.abstract_projector import AbstractProjector
 
 if __name__ == "__main__":
     projectors = [LampProjector("Panasonic", "480p", "HDMI", 5, "presentation", 15),
@@ -33,3 +32,7 @@ if __name__ == "__main__":
     print(projector_manager.working_of_get_remaining_working_hours())
     print(projector_manager.is_all_get_remaining_working_hours_greater_than())
     print(projector_manager.is_any_get_remaining_working_hours_greater_than())
+    print(projector_manager.__next__())
+
+    for projector in projector_manager.projectors:
+        print(projector.get_attributes(type(5)))

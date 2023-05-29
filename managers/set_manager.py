@@ -52,12 +52,11 @@ class SetManager:
             list: The colors from the specified index.
 
         """
-        return self.manager[item].projector_color
+        return self.manager.projectors[item].projector_color
 
     def __next__(self):
         """
         Get the next projector in the manager.
-
         Returns:
             Projector: The next projector.
 

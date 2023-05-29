@@ -63,7 +63,7 @@ class ProjectManager:
         Returns:
             iterator: Iterator object.
         """
-        return iter(self.projectors)
+        return iter(self)
 
     def __next__(self):
         """
@@ -106,7 +106,7 @@ class ProjectManager:
         Returns:
             list: List of tuples containing the index and matching projectors.
         """
-        return list(filter(lambda projector: getattr(projector, "model") == model, self.projectors))
+        return list([projector for projector in self.projectors if projector.model == model])
 
     @call_limit_decorator(3)
     def find_projector_by_resolution(self, resolution):
@@ -125,7 +125,6 @@ class ProjectManager:
     def working_of_get_remaining_working_hours(self):
         """
         Get the remaining working hours of all projectors.
-
         Returns:
             list: List of tuples containing the remaining working hours and projectors.
         """

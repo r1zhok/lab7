@@ -13,7 +13,6 @@ def count_of_args_decorator(func):
     Returns:
         function: The decorated function.
     """
-
     def wrapper(*args, **kwargs):
         """
         Wrapper function that counts the number of arguments and calls the original function.

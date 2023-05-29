@@ -39,7 +39,7 @@ class AbstractProjector(ABC):
         """
         return iter(sorted(self.projector_color))
 
-    def get_attributes(self, data_type):
+    def get_attributes(self, variable):
         """
         Get attributes of the projector that match the specified variable type.
 
@@ -50,7 +50,7 @@ class AbstractProjector(ABC):
             dict: Dictionary containing attribute names and values
             that match the specified variable type.
         """
-        return {key: value for key, value in self.__dict__.items() if isinstance(value, data_type)}
+        return {key: value for key, value in self.__dict__.items() if isinstance(value, variable)}
 
     @abstractmethod
     def add_input_device(self, device):
