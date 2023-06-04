@@ -33,6 +33,8 @@ if __name__ == "__main__":
     print(projector_manager.is_all_get_remaining_working_hours_greater_than())
     print(projector_manager.is_any_get_remaining_working_hours_greater_than())
     print(projector_manager.__next__())
+    lamp_projector = LampProjector()
+    print(lamp_projector.add_input_device("HDMI"))
 
     for projector in projector_manager.projectors:
         print(projector.get_attributes(type(5)))
