@@ -2,6 +2,8 @@
 Module of LampProjector class
 """
 from lab7.modules.abstract_projector import AbstractProjector
+from lab7.decorators.decorators import logged
+from lab7.exceptions.no_device_exeption import NoDeviceException
 
 
 class LampProjector(AbstractProjector):
@@ -45,6 +47,7 @@ class LampProjector(AbstractProjector):
         self.the_maximum_permissible_lamp_operating_time = the_maximum_permissible_lamp_operating_time
         self.projector_color = {"yellow"}
 
+    @logged(NoDeviceException, "console")
     def add_input_device(self, device):
         """
         Adds an input device to the lamp projector.
@@ -53,6 +56,7 @@ class LampProjector(AbstractProjector):
             device (str): The input device to add.
         """
         self.connected_device = device
+        return self.connected_device
 
     def disconnected_device(self):
         """

@@ -1,6 +1,8 @@
 """
 Module of decorations
 """
+import logging
+from functools import wraps
 
 
 def count_of_args_decorator(func):
@@ -13,6 +15,7 @@ def count_of_args_decorator(func):
     Returns:
         function: The decorated function.
     """
+
     def wrapper(*args, **kwargs):
         """
         Wrapper function that counts the number of arguments and calls the original function.
@@ -63,6 +66,34 @@ def call_limit_decorator(max_calls):
                 raise Exception("Too many calls")
             return func(*args, **kwargs)
 
+        return wrapper
+
+    return decorator
+
+
+def logged(exception, mode):
+    def decorator(func):
+        count = 0
+        @wraps(func)
+        def wrapper(self, *args, **kwargs):
+            nonlocal count
+            for argument in args:
+                count+=1
+                try:
+                    if type(argument) is not str:
+                        raise exception
+                except exception:
+                    if mode == "console":
+                        logging.getLogger().setLevel(logging.DEBUG)
+                        logging.debug('The argument type must be str')
+                    elif mode == "file":
+                        logging.basicConfig(level=logging.DEBUG, filename='my_log.log')
+                        logging.debug('The argument type must be str')
+                    else:
+                        raise TypeError("Log can be only console or file")
+                else:
+                    if len(args)==count:
+                        return func(self, *args, **kwargs)
         return wrapper
 
     return decorator
